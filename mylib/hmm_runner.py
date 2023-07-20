@@ -46,18 +46,28 @@ class HMMRunner:
                 letter = self.mpg.next_state()
 
                 if letter is None:
+                    print('---')
                     break
                 else:
                     obs_state = self.mpg.char_to_num[letter]
 
+                print(letter, obs_state, self.hmm.predict_observation_states())
+                
+                # вектор предсказываемых вероятностей состояний
                 observation_probs = self.hmm.predict_observation_states()
-
+                
+                
                 # learn on new observed state
                 self.hmm.observe(obs_state, learn=True)
+
+
+
+
 
                 # metrics
                 # 1. surprise
                 active_columns = np.arange(self.hmm.n_columns) == obs_state
+                # = [F F F T F ...]
                 surprise = - np.sum(np.log(observation_probs[active_columns]))
                 surprise += - np.sum(np.log(1 - observation_probs[~active_columns]))
 

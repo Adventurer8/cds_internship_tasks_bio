@@ -11,12 +11,12 @@ class MarkovProcessGrammar:
             autoreset=False,
             seed=None
     ):
-        transition_probs = np.array(transition_probs, dtype=np.float)
+        transition_probs = np.array(transition_probs, dtype=float)
         norm = transition_probs.sum(axis=-1).reshape(-1, 1)
         norm_transition_probs = np.divide(
             transition_probs, norm,
             where=(norm != 0.0),
-            out=np.zeros_like(transition_probs, dtype=np.float)
+            out=np.zeros_like(transition_probs, dtype=float)
         )
 
         self.terminal_states = np.flatnonzero(norm == 0)

@@ -41,7 +41,8 @@ class CHMM:
         self.n_columns = n_columns
         self.cells_per_column = cells_per_column
         self.n_states = cells_per_column * n_columns
-        self.states = np.arange(self.n_states)
+        # self.states = np.arange(self.n_states)
+        self.states = np.random.rand(self.n_states, self.n_states)
         self.lr = lr
         self.batch_size = batch_size
         self.initialization = initialization
@@ -76,21 +77,50 @@ class CHMM:
             self.log_transition_factors = np.log(self.transition_probs)
             self.log_state_prior = np.log(self.state_prior)
 
-    def observe(self, observation_state: int, learn: bool = True) -> None:
+
+
+
+    def reset(self):
+        """
+        Here make preparations for starting new sequence of observations.
+        """
+
+        # transition_probs - матрица переходов между скрытыми параметрами (transition)
+
+        self.is_first = True
+        return
+    
+
+    def observe(self, observation_state: int, learn: bool = True):
         """
         Here method gets new observation state and make matrix updates.
+        Получает новое состояние наблюдения и обновляет матрицу
         """
-        raise NotImplementedError
+        # E
+        # forward - рекурсивно вычисляем прямые вероятности
+        # 
+        # alpha = ...
+        
+        # backward - и обратные вероятности
+        # beta = ...
+
+        # Обновляем апостериорные вероятности
+        # self.state_prior
+        
+        
+        # M
+        # обновляем матрицу перехода, путем нормализации
+        
+        return
 
     def predict_observation_states(self) -> np.ndarray:
         """
         Should return probabilities of observation states for the next timestep, which sum to 1.
+        Возвращает вероятности состояний наблюдения для следующего шага (нормированные)
         """
-        raise NotImplementedError
 
-    def reset(self) -> None:
-        """
-        Here make preparations for starting new sequence of observations.
-        """
-        self.is_first = True
-        raise NotImplementedError
+
+        # Отладочная
+        res = np.array([1 for i in range(self.n_columns)])
+        
+        return res / np.sum(res)

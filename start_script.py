@@ -5,7 +5,7 @@ import os
 from mylib.hmm_runner import HMMRunner
 
 # specify you login in wandb, you should also authorize with token first, see wandb quick start documentation
-os.environ['WANDB_ENTITY'] = 'your_login'
+os.environ['WANDB_ENTITY'] = 'adventurer8'
 
 config_path = 'configs/hmm_runner.yaml'
 
